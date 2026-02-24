@@ -21,6 +21,5 @@ public class PostController implements PostAPI {
         if (author == null || author.isBlank()) {
             return postService.getAllPosts();
         }
-        return postService.getPostsByAuthor(author);
-    }
+        return postService.getPostsByAuthor(author);}
 }

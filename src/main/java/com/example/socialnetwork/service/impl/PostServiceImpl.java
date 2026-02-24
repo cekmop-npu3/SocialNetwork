@@ -23,9 +23,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> getPostsByAuthor(String author) {
-        return postRepository.findByAuthor(author).stream()
-                .map(postMapper::toDto)
-                .toList();
+        return postRepository.findByAuthor(author).stream().map(postMapper::toDto).toList();
     }
 
     @Override
