@@ -55,3 +55,7 @@ curl http://localhost:8080/api/posts
 * Pagination and sorting
 * Caching
 * Containerization with Docker
+
+## SonarCloud Analysis
+
+[sonar-cloud](https://sonarcloud.io/summary/new_code?id=cekmop-npu3_SocialNetwork)
