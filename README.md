@@ -1,5 +1,6 @@
 # Social Network API
 
+
 ## Description
 
 Spring Boot REST application for managing social network posts.
