@@ -17,7 +17,7 @@ public class PostMapper {
         PostDto dto = new PostDto();
         dto.setId(post.getId());
         dto.setContent(post.getContent());
-        dto.setAuthor(post.getAuthor());
+        dto.setAuthor(post.getUser() != null ? post.getUser().getUsername() : null);
         dto.setCreatedAt(post.getCreatedAt() != null ? post.getCreatedAt().format(FORMATTER) : null);
         return dto;
     }
@@ -29,7 +29,6 @@ public class PostMapper {
         Post post = new Post();
         post.setId(dto.getId());
         post.setContent(dto.getContent());
-        post.setAuthor(dto.getAuthor());
         post.setCreatedAt(dto.getCreatedAt() != null ? LocalDateTime.parse(dto.getCreatedAt(), FORMATTER) : null);
         return post;
     }

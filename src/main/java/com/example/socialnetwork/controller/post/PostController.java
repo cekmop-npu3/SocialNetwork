@@ -22,4 +22,9 @@ public class PostController implements PostAPI {
             return postService.getAllPosts();
         }
         return postService.getPostsByAuthor(author);}
+
+    @Override
+    public PostDto createPost(PostDto postDto) {
+        return postService.createPost(postDto);
+    }
 }
