@@ -7,5 +7,6 @@ public interface PostService {
     PostDto getPostById(Long id);
     List<PostDto> getPostsByAuthor(String author);
     List<PostDto> getAllPosts();
+    List<PostDto> getNAllPosts();
     PostDto createPost(PostDto postDto);
 }

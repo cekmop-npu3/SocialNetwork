@@ -14,6 +14,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Override
     List<Post> findAll();
 
+    @Query("SELECT p FROM Post p")
+    List<Post> findNAll();
+
     @Query("SELECT p FROM Post p LEFT JOIN FETCH p.comments WHERE p.id = :id")
     Post findByIdWithComments(@Param("id") Long id);
 }

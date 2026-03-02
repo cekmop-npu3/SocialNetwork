@@ -39,6 +39,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostDto> getNAllPosts() {
+        return postRepository.findNAll().stream()
+                .map(postMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public PostDto createPost(PostDto postDto) {
         Post post = postMapper.toEntity(postDto);
         User user = userRepository.findByUsername(postDto.getAuthor())
