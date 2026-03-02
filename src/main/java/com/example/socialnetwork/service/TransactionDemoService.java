@@ -21,7 +21,7 @@ public class TransactionDemoService {
     private final CommentRepository commentRepository;
     private final PostMapper postMapper;
 
-    public void createPostAndCommentWithoutTransaction(PostDto postDto, String commentContent) {
+    public void createPostAndCommentWithoutTransaction(PostDto postDto) {
         Post post = postMapper.toEntity(postDto);
         User user = userRepository.findByUsername(postDto.getAuthor())
                 .orElseGet(() -> {
@@ -38,7 +38,7 @@ public class TransactionDemoService {
     }
 
     @Transactional
-    public void createPostAndCommentWithTransaction(PostDto postDto, String commentContent) {
+    public void createPostAndCommentWithTransaction(PostDto postDto) {
         Post post = postMapper.toEntity(postDto);
         User user = userRepository.findByUsername(postDto.getAuthor())
                 .orElseGet(() -> {
