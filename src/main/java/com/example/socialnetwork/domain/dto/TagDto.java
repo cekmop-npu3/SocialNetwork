@@ -1,6 +1,5 @@
 package com.example.socialnetwork.domain.dto;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDto {
+public class TagDto {
     private Long id;
-    private String content;
-    private String author;
-    private String createdAt;
-    private Integer commentCount;
-    private List<String> tags;
+    private String name;
 }

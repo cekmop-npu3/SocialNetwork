@@ -1,13 +1,20 @@
 spring:
   application:
     name: SocialNetwork
+  config:
+    import: optional:file:.env[.properties],optional:file:./config/application-secrets.properties
   datasource:
-    url: jdbc:postgresql://localhost:5432/socialnetwork
-    username: socialuser
-    password: secret
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/socialnetwork}
+    username: ${DB_USERNAME:socialuser}
+    password: ${DB_PASSWORD:change_me}
     driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: ${JPA_DDL_AUTO:update}
     show-sql: true
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: false

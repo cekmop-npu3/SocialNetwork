@@ -4,7 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-src/main/resourses/application.yaml
+src/main/resources/application-secrets.properties
+.env
+config/application-secrets.properties
 
 ### STS ###
 .apt_generated

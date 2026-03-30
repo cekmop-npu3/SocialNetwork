@@ -2,9 +2,10 @@ package com.example.socialnetwork.mapper;
 
 import com.example.socialnetwork.domain.dto.PostDto;
 import com.example.socialnetwork.domain.model.Post;
-import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Component
 public class PostMapper {
@@ -14,12 +15,17 @@ public class PostMapper {
         if (post == null) {
             return null;
         }
-        PostDto dto = new PostDto();
-        dto.setId(post.getId());
-        dto.setContent(post.getContent());
-        dto.setAuthor(post.getUser() != null ? post.getUser().getUsername() : null);
-        dto.setCreatedAt(post.getCreatedAt() != null ? post.getCreatedAt().format(FORMATTER) : null);
-        return dto;
+        final List<String> tagNames = post.getTags().stream()
+                .map(tag -> tag.getName())
+                .toList();
+        return new PostDto(
+                post.getId(),
+                post.getContent(),
+                post.getUser() == null ? null : post.getUser().getUsername(),
+                post.getCreatedAt() == null ? null : post.getCreatedAt().format(FORMATTER),
+                post.getComments() == null ? 0 : post.getComments().size(),
+                tagNames
+        );
     }
 
     public Post toEntity(PostDto dto) {
@@ -29,7 +35,9 @@ public class PostMapper {
         Post post = new Post();
         post.setId(dto.getId());
         post.setContent(dto.getContent());
-        post.setCreatedAt(dto.getCreatedAt() != null ? LocalDateTime.parse(dto.getCreatedAt(), FORMATTER) : null);
+        if (dto.getCreatedAt() != null) {
+            post.setCreatedAt(LocalDateTime.parse(dto.getCreatedAt(), FORMATTER));
+        }
         return post;
     }
 }

@@ -1,22 +1,24 @@
 package com.example.socialnetwork.repository;
 
 import com.example.socialnetwork.domain.model.Post;
+import java.util.List;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByUserUsername(String username);
 
-    @EntityGraph(attributePaths = {"comments"})
-    @Override
-    List<Post> findAll();
+    @Query("select p from Post p")
+    List<Post> findAllForNPlusOne();
 
-    @Query("SELECT p FROM Post p")
-    List<Post> findNAll();
+    @EntityGraph(attributePaths = {"user", "comments", "tags"})
+    @Query("select p from Post p")
+    List<Post> findAllWithEntityGraph();
 
-    @Query("SELECT p FROM Post p LEFT JOIN FETCH p.comments WHERE p.id = :id")
-    Post findByIdWithComments(@Param("id") Long id);
+    @Query("select distinct p from Post p "
+            + "left join fetch p.user "
+            + "left join fetch p.comments "
+            + "left join fetch p.tags") 
+    List<Post> findAllWithFetchJoin();
 }
